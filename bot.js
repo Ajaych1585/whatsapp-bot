@@ -1,6 +1,7 @@
 const qrcode = require('qrcode-terminal')
-const { Client } = require('whatsapp-web.js')
-const logger = require('./logger') // ⬅️ new
+const { Client, MessageMedia } = require('whatsapp-web.js')
+const logger = require('./logger')
+const path = require('path')
 require('dotenv').config()
 
 const client = new Client()
@@ -10,7 +11,7 @@ const targetGroups = [
 ]
 
 const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride']
-const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation']
+const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female']
 
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true })
@@ -42,16 +43,45 @@ client.on('message', async msg => {
   const containsRide = rideKeywords.some(keyword => text.includes(keyword))
   const containsAccom = accomKeywords.some(keyword => text.includes(keyword))
 
-  if (containsRide || containsAccom) {
-    const grofyyMessage =
-      `📍 It looks like you're looking for ride or accommodation options.\n\n` +
-      `🚀 Visit 👉 https://www.grofyy.com`
+  // Determine message type
+  let matchedType = ''
+  if (containsRide && containsAccom) matchedType = 'both'
+  else if (containsRide) matchedType = 'ride'
+  else if (containsAccom) matchedType = 'accom'
+
+  logger.info(`📌 Matched type: ${matchedType}`)
+
+  if (matchedType) {
+    let messageText = ''
+    let imageName = ''
+
+    if (matchedType === 'both') {
+      messageText =
+        `🌐 Looking for both ride and accommodation?\n\n` +
+        `Grofyy has you covered for everything.\n👉 https://www.grofyy.com`
+      imageName = 'grofyy.jpeg'
+    } else if (matchedType === 'ride') {
+      messageText =
+        `🚗 Looking for a ride?\n\n` +
+        `🛣️ Connect with riders near you.\n👉 https://www.grofyy.com`
+      imageName = 'grofyyride.jpeg'
+    } else if (matchedType === 'accom') {
+      messageText =
+        `🏠 Looking for a place to stay?\n\n` +
+        `🛏️ Find or post accommodation easily!\n👉 https://www.grofyy.com`
+      imageName = 'grofyystay.jpeg'
+    }
 
     try {
-      await client.sendMessage(privateChatId, grofyyMessage, {
+      const imagePath = path.join(__dirname, 'static', imageName)
+      const media = MessageMedia.fromFilePath(imagePath)
+
+      await client.sendMessage(privateChatId, media, {
+        caption: messageText,
         quotedMessageId: msg.id._serialized,
       })
-      logger.info(`📤 Sent private reply to ${contact.number}`)
+
+      logger.info(`📤 Sent private reply with ${imageName} to ${contact.number}`)
     } catch (err) {
       logger.error(`❌ Failed to send message to ${contact.number}: ${err.message}`)
     }
