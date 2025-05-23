@@ -10,7 +10,7 @@ const targetGroups = [
   '919948275795-1634459859@g.us',
 ]
 
-const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride','want ride']
+const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride','want ride','commute']
 const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female','looking stay']
 
 client.on('qr', qr => {
