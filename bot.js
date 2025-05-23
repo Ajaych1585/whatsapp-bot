@@ -10,8 +10,8 @@ const targetGroups = [
   '919948275795-1634459859@g.us',
 ]
 
-const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride']
-const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female']
+const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride','want ride']
+const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female','looking stay']
 
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true })
