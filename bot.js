@@ -69,7 +69,7 @@ client.on('message', async msg => {
       messageText =
         `🏠 Looking for a place to stay?\n\n` +
         `🛏️ Find or post accommodation easily!\n👉 https://www.grofyy.com`
-      imageName = 'grofyystay.jpeg'
+      imageName = 'grofyystay.png'
     }
 
     try {
