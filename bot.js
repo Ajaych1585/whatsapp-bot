@@ -9,7 +9,7 @@ require('dotenv').config()
 const client = new Client()
 
 const EXCEL_FILE = path.join(__dirname, 'group_numbers.xlsx')
-const targetGroups = ['120363394472078441@g.us']
+const targetGroups = ['120363394472078441@g.us'] // Replace with your actual group ID
 
 const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride', 'want ride', 'commute']
 const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female', 'looking stay']
@@ -63,18 +63,28 @@ client.on('ready', async () => {
 })
 
 client.on('group_join', async notification => {
-  const groupId = notification.chatId
-  if (!targetGroups.includes(groupId)) return
+  console.log('👀 group_join event fired')
 
-  const contact = await notification.getContact()
-  const number = contact.number
+  const groupId = notification.chatId
+  if (!targetGroups.includes(groupId)) {
+    console.log('❌ Group not in targetGroups. Skipping.')
+    return
+  }
 
   const numbersSet = readExcelNumbers()
-  if (!numbersSet.has(number)) {
-    numbersSet.add(number)
-    writeExcelNumbers(numbersSet)
-    logger.info(`➕ New member ${number} added to Excel from group ${groupId}`)
+
+  for (const recipientId of notification.recipientIds || []) {
+    const number = recipientId.split('@')[0]
+
+    if (!numbersSet.has(number)) {
+      numbersSet.add(number)
+      logger.info(`➕ New member ${number} added to Excel from group ${groupId}`)
+    } else {
+      logger.info(`ℹ️ Member ${number} already in Excel.`)
+    }
   }
+
+  writeExcelNumbers(numbersSet)
 })
 
 client.on('message', async msg => {
