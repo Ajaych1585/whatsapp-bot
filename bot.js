@@ -2,16 +2,34 @@ const qrcode = require('qrcode-terminal')
 const { Client, MessageMedia } = require('whatsapp-web.js')
 const logger = require('./logger')
 const path = require('path')
+const fs = require('fs')
+const XLSX = require('xlsx')
 require('dotenv').config()
 
 const client = new Client()
 
-const targetGroups = [
-  '919948275795-1634459859@g.us',
-]
+const EXCEL_FILE = path.join(__dirname, 'group_numbers.xlsx')
+const targetGroups = ['120363394472078441@g.us']
 
-const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride','want ride','commute']
-const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female','looking stay']
+const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride', 'want ride', 'commute']
+const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female', 'looking stay']
+
+function readExcelNumbers() {
+  if (!fs.existsSync(EXCEL_FILE)) return new Set()
+  const workbook = XLSX.readFile(EXCEL_FILE)
+  const sheet = workbook.Sheets[workbook.SheetNames[0]]
+  const data = XLSX.utils.sheet_to_json(sheet)
+  return new Set(data.map(row => row.Number))
+}
+
+function writeExcelNumbers(numbersSet) {
+  const data = Array.from(numbersSet).map(number => ({ Number: number }))
+  const worksheet = XLSX.utils.json_to_sheet(data)
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Group Members')
+  XLSX.writeFile(workbook, EXCEL_FILE)
+  logger.info(`📁 Excel updated with ${data.length} unique numbers.`)
+}
 
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true })
@@ -29,6 +47,34 @@ client.on('ready', async () => {
   })
 
   logger.info('📝 Bot is listening to selected group(s) and will send private replies for matching keywords.')
+
+  const existingNumbers = readExcelNumbers()
+
+  for (const groupId of targetGroups) {
+    const chat = await client.getChatById(groupId)
+    const participants = chat.participants || []
+
+    participants.forEach(p => {
+      if (p.id.user) existingNumbers.add(p.id.user)
+    })
+  }
+
+  writeExcelNumbers(existingNumbers)
+})
+
+client.on('group_join', async notification => {
+  const groupId = notification.chatId
+  if (!targetGroups.includes(groupId)) return
+
+  const contact = await notification.getContact()
+  const number = contact.number
+
+  const numbersSet = readExcelNumbers()
+  if (!numbersSet.has(number)) {
+    numbersSet.add(number)
+    writeExcelNumbers(numbersSet)
+    logger.info(`➕ New member ${number} added to Excel from group ${groupId}`)
+  }
 })
 
 client.on('message', async msg => {
@@ -43,7 +89,6 @@ client.on('message', async msg => {
   const containsRide = rideKeywords.some(keyword => text.includes(keyword))
   const containsAccom = accomKeywords.some(keyword => text.includes(keyword))
 
-  // Determine message type
   let matchedType = ''
   if (containsRide && containsAccom) matchedType = 'both'
   else if (containsRide) matchedType = 'ride'
