@@ -9,7 +9,7 @@ require('dotenv').config()
 const client = new Client()
 
 const EXCEL_FILE = path.join(__dirname, 'group_numbers.xlsx')
-const targetGroups = ['120363394472078441@g.us'] // Replace with your actual group ID
+const targetGroups = ['120363039394588205@g.us'] // Replace with your actual group ID
 
 const rideKeywords = ['ride', 'rides', 'need ride', 'looking for ride', 'want ride', 'commute']
 const accomKeywords = ['accommodation', 'room', 'stay', 'need accommodation', 'people', 'male', 'female', 'looking stay']
@@ -23,7 +23,17 @@ function readExcelNumbers() {
 }
 
 function writeExcelNumbers(numbersSet) {
-  const data = Array.from(numbersSet).map(number => ({ Number: number }))
+  const data = Array.from(numbersSet)
+    .filter(fullNumber => typeof fullNumber === 'string' && /^\d{11,15}$/.test(fullNumber)) // basic validation
+    .map(fullNumber => {
+      const phoneNumber = fullNumber.slice(-10)
+      const countryCode = fullNumber.slice(0, fullNumber.length - 10)
+      return {
+        CountryCode: countryCode,
+        PhoneNumber: phoneNumber,
+      }
+    })
+
   const worksheet = XLSX.utils.json_to_sheet(data)
   const workbook = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Group Members')
