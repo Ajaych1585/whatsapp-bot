@@ -23,6 +23,21 @@ const targetGroups = [
   '120363226913795936@g.us', // Rides 🇮🇳🇺🇸
   '120363170843342983@g.us', // Rides
   '120363230176405064@g.us', // Rides Mania🏁
+  '120363288655317757@g.us', // NRI TDP Dallas
+  '120363305011014128@g.us', // NRI TDP Dallas 2
+  '14695859064-1380215849@g.us', // NRI TDP Dallas 1
+  '120363320871159143@g.us', // Easy rides to Frisco
+  '120363043221085967@g.us', // NRI Telugu Yuvatha Dallas
+  '120363344815013435@g.us', // Kamma Seva Samithi - Dallas-2
+  '120363366674849757@g.us', // Jan 25 Batch
+  '120363398566131779@g.us', // Akhila Bharatha kamma charitable trust (NRI) GROUP
+  '120363364899378715@g.us', // AI Req
+  '120363042506414432@g.us', // Fall 2022
+  '120363349947802787@g.us', // UNT-Grocery-HanumanTemple-KSHT)
+  '120363047144370452@g.us', // Fall
+  '120363134035803348@g.us', // Lalitha Fools in Abroad✈️
+  '120363412793269964@g.us', // Dallas Vasulu (job requirement)
+  '120363306587841917@g.us', // NRI TDP Dallas (duplicate name)
 ]
 
 module.exports = targetGroups
