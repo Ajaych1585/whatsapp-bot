@@ -37,7 +37,27 @@ const targetGroups = [
   '120363047144370452@g.us', // Fall
   '120363134035803348@g.us', // Lalitha Fools in Abroad✈️
   '120363412793269964@g.us', // Dallas Vasulu (job requirement)
-  '120363306587841917@g.us', // NRI TDP Dallas (duplicate name)
+    '120363096508194341@g.us', // Virginia/Reston/Herndon/Fairfax Sublease Rental Posts
+  '120363161751422486@g.us', // Oklahoma City || Edmond || Tulsa || Norman || Midwest City || Moore, OK-Accommodation & Rides
+  '120363278530579780@g.us', // Need_a_ride_Group2
+  '120363126416722780@g.us', // Travel Group - Fall 🍂🍁🏫🎒
+  '120363040963913677@g.us', // TTU Students (2022-2023)
+  '120363047443174817@g.us', // NIU Indians - ISA
+  '120363080210656885@g.us', // NIU ISA Fall 2023 Admits
+  '120363055444201629@g.us', // NIU Spring and Fall 2024
+  '120363293349492694@g.us', // Rideshare 1
+  '120363213344634802@g.us', // NIU Spring 2024 Accomodation
+  '120363308227837613@g.us', // NIU fall 2024
+  '120363294004237507@g.us', // Rideshare 2
+  '120363330235194242@g.us', // NIU Indian Undergrads
+  '120363044735943440@g.us', // NIUISA Spring 2023 Admits
+  '120363046018991665@g.us', // NIU Indians - ISA
+  '120363359051963162@g.us', // UNT HYDERABADI MUSLIM BROTHERS
+  '120363311643866970@g.us', // Denton cricket club
+  '120363039232834520@g.us', // ISD Hyderabad Iftar 04/13
+  '120363030529665763@g.us', // party catering services / with free home deliveries
+  '120363028692754972@g.us', // DSCI 5340 GROUP PROJECT
+  '120363027476332516@g.us', // UNT_Fountains
 ]
 
 module.exports = targetGroups
