@@ -1,5 +1,3 @@
-// config/groups.js
-
 const targetGroups = [
   '120363042605788269@g.us', // VVC- Rides -1
   '120363317344029475@g.us', // UNT 2
@@ -12,7 +10,7 @@ const targetGroups = [
   '120363143914086835@g.us', // Rideshare-2 UNT/UTA/UTD
   '120363186937054145@g.us', // UNT Friends
   '120363027033877117@g.us', // UNT 2025 Confirmed
-  '120363023171483562@g.us', // UNT RIDE SHARING🚗
+  '120363023171483562@g.us', // UNT RIDE SHARING🚗 ✅ duplicate
   '120363163082195671@g.us', // Texas City || Dallas...
   '120363077579598523@g.us', // University Of North Texas
   '120363170187902889@g.us', // 🚥RIDE _KAVALA🚥🇺🇸
@@ -37,7 +35,7 @@ const targetGroups = [
   '120363047144370452@g.us', // Fall
   '120363134035803348@g.us', // Lalitha Fools in Abroad✈️
   '120363412793269964@g.us', // Dallas Vasulu (job requirement)
-    '120363096508194341@g.us', // Virginia/Reston/Herndon/Fairfax Sublease Rental Posts
+  '120363096508194341@g.us', // Virginia/Reston/Herndon/Fairfax Sublease Rental Posts
   '120363161751422486@g.us', // Oklahoma City || Edmond || Tulsa || Norman || Midwest City || Moore, OK-Accommodation & Rides
   '120363278530579780@g.us', // Need_a_ride_Group2
   '120363126416722780@g.us', // Travel Group - Fall 🍂🍁🏫🎒
@@ -58,6 +56,30 @@ const targetGroups = [
   '120363030529665763@g.us', // party catering services / with free home deliveries
   '120363028692754972@g.us', // DSCI 5340 GROUP PROJECT
   '120363027476332516@g.us', // UNT_Fountains
+  '120363140523161873@g.us', // HOUSTON Carpools🚗
+  '120363026030796678@g.us', // UNT LYFT /RIDES🚘🚙
+  '120363041827576221@g.us', // Unt car prayanamu
+  '120363040832927138@g.us', // UNT FALL 2022 -Jobs,Rides
+  '120363316911093014@g.us', // Dallaspuram rides🚘
+  '120363029674334880@g.us', // HH/SY RIDES 🚘🚗
+  '120363312050313815@g.us', // Houston 🚙 2
+  '120363343752682989@g.us', // Ride in Houston
+  '120363419263213602@g.us', // ManaDesi Mangoes (Houston)
+  '120363218959488359@g.us', // Layalina Team Members
+  '120363303304350846@g.us', // Rayzor ranch
+  '120363331607724160@g.us', // [Unnamed Group]
+  '120363420179311471@g.us', // [Unnamed Group]
+  '120363169599046068@g.us', // EpochonE
+  '120363141688677292@g.us', // Data Modelling Project
+  '120363160482715738@g.us', // Data modelling group
+  '120363049089355059@g.us', // Data Visualization Project-11
+  '120363029202928251@g.us', // TA spring 2023 CSCE 3110
+  '120363029922383989@g.us', // Desi ruchulu 🐥 🍆
+  '120363044388388333@g.us', // Machine learning
+  '120363027062012351@g.us', // Big data tariq sat
+  '120363028069012796@g.us', // Bigdata
+  '120363045951871902@g.us', // ML Presentation
+  '120363042561798915@g.us', // Accommodation
 ]
 
 module.exports = targetGroups
