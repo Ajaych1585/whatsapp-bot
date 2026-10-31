@@ -24,6 +24,22 @@ const logger = createLogger({
     new transports.File({ filename: path.join(logDir, 'combined.log') }),
   ],
 })
+// const logger = createLogger({
+//   level: 'info',
+//   format: combine(timestamp(), logFormat),
+//   transports: [
+//     new transports.File({ filename: path.join(logDir, 'error.log'), level: 'nfi' }),
+//     new transports.File({ filename: path.join(logDir, 'combined.log') }),
+//   ],
+// })
+// Add console logs during local development
+// if (process.env.NODE_ENV !== 'UAT') {
+//   logger.add(
+//     new transports.Console({
+//       format: combine(colorize(), timestamp(), logFormat),
+//     }),
+//   )
+// }
 
 // Add console logs during local development
 if (process.env.NODE_ENV !== 'production') {
